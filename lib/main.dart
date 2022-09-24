@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:index2/client.dart';
 import 'package:index2/register.dart';
+import 'package:index2/resetpassword.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blueGrey,
       ),
-      home: client()//const MyHomePage(title: 'Login'),
+      home:const MyHomePage(title: 'TRANSPORTATON JOBS MOBILE APP'),
     );
   }
 }
@@ -54,13 +55,13 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Expanded(child: Text('Name')),
+                    Expanded(child: Text('Email Address')),
                     SizedBox(
                       width: 20,
                     ),
                     Expanded(
                         child: TextField(
-                      decoration: InputDecoration(hintText: 'name'),
+                      decoration: InputDecoration(hintText: 'Email'),
                     )),
                   ],
                 ),
@@ -81,8 +82,8 @@ class _MyHomePageState extends State<MyHomePage> {
                   ],
                 ),
               ),
-              TextButton(onPressed: () {}, child: Text('Login')),
-              TextButton(onPressed: () {}, child: Text('Forgot Password?')),
+              TextButton(onPressed: () =>Navigator.of(context).push(MaterialPageRoute(builder:((context) => client()))), child: Text('Login')),
+              TextButton(onPressed: () =>Navigator.of(context).push(MaterialPageRoute(builder:((context) => ResetPassword()))),child: Text('Forgot Password?')),
               TextButton(onPressed: () =>Navigator.of(context).push(MaterialPageRoute(builder:((context) => Register()))), child: Text('No Account?Register now'))
             ])));
   }

@@ -3,6 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:index2/clientreg.dart';
+import 'package:index2/driverreg.dart';
 import 'package:index2/main.dart';
 
 class Register extends StatefulWidget {
@@ -33,13 +35,13 @@ class _RegisterState extends State<Register> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Expanded(child: Text('Name')),
+                      Expanded(child: Text('Email address')),
                       SizedBox(
                         width: 20,
                       ),
                       Expanded(
                           child: TextField(
-                        decoration: InputDecoration(hintText: 'name'),
+                        decoration: InputDecoration(hintText: 'Enter email'),
                       )),
                     ],
                   ),
@@ -76,8 +78,8 @@ class _RegisterState extends State<Register> {
                     ],
                   ),
                 ),
-                TextButton(onPressed: () {}, child: Text('Register as a Driver')),
-                TextButton(onPressed: () {}, child: Text('Register as a Client')),
+                TextButton(onPressed: () =>Navigator.of(context).push(MaterialPageRoute(builder:((context) => DriverReg()))), child: Text('Register as a Driver')),
+                TextButton(onPressed: () =>Navigator.of(context).push(MaterialPageRoute(builder:((context) => ClientReg()))), child: Text('Register as a Client')),
                 
                 TextButton(onPressed: () =>Navigator.of(context).pop(), child: Text('Already have  Account?Login now'))
           ],
