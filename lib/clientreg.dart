@@ -63,6 +63,9 @@ class _ClientRegState extends State<ClientReg> {
             ),
           ),
           ListTile(
+             onTap: () {
+                
+              },
               leading: Icon(Icons.perm_identity), title: Text('Upload ID')),
   ]),
     

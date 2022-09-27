@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:index2/chatroom.dart';
+import 'package:index2/main.dart';
 
 class client extends StatefulWidget {
   const client({super.key});
@@ -29,7 +30,10 @@ class _clientState extends State<client> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Available Jobs'),
+        title: Text('Available Jobs',style: TextStyle(color: Colors.greenAccent),),
+        actions: [TextButton(onPressed: (){
+          Auth().SignOut();
+        }, child: Text('Logout',style: TextStyle(color: Colors.lightGreenAccent),))],
       ),
       body: ListView.builder(
         itemCount: images.length,

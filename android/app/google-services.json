@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "66616397964",
+    "project_id": "transport-jobs-mobile-app",
+    "storage_bucket": "transport-jobs-mobile-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:66616397964:android:61793b82388b61f934eba9",
+        "android_client_info": {
+          "package_name": "com.example.index2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "66616397964-16h5tjqrosnoea5630hk7vst0241u3n6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCKAL5duS4lkmqNrf6sZadWxAx1XB9CfEs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "66616397964-16h5tjqrosnoea5630hk7vst0241u3n6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
