@@ -132,7 +132,7 @@ class _MyHomePageState extends State<MyHomePage> {
 }
 
 class Auth {
-  FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
 
   handleAuth() {
    
@@ -148,8 +148,10 @@ class Auth {
   }
 
   Future SignIn(String email, String password) async {
-     User? _user = _auth.currentUser;
-    await _auth.signInWithEmailAndPassword(email: email, password: password).then((value) => Fluttertoast.showToast(msg: 'logged in as ${_user!.email}'));
+
+    await _auth.signInWithEmailAndPassword(email: email, password: password).then((creds) => //debugPrint(user.toString())
+     Fluttertoast.showToast(msg: 'logged in as ${creds.user!.email}')
+     );
   }
   Future SignOut()async{
     await _auth.signOut();

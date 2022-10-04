@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:image_picker/image_picker.dart';
 
 class ClientReg extends StatefulWidget {
   const ClientReg({super.key});
@@ -12,6 +13,16 @@ class ClientReg extends StatefulWidget {
 }
 
 class _ClientRegState extends State<ClientReg> {
+   XFile? cameraFile;
+  
+   selectFromCamera() async {
+      cameraFile=(await ImagePicker().pickImage(
+        source: ImageSource.camera,
+        // maxHeight: 50.0,
+        // maxWidth: 50.0,
+      )) ;
+      setState(() {});
+    }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,7 +75,7 @@ class _ClientRegState extends State<ClientReg> {
           ),
           ListTile(
              onTap: () {
-                
+                selectFromCamera();
               },
               leading: Icon(Icons.perm_identity), title: Text('Upload ID')),
   ]),
