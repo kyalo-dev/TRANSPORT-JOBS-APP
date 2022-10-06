@@ -16,16 +16,20 @@ class DriverReg extends StatefulWidget {
 
 class _DriverRegState extends State<DriverReg> {
   XFile? cameraFile;
-  
-   selectFromCamera() async {
-      cameraFile=(await ImagePicker().pickImage(
-        source: ImageSource.camera,
-        // maxHeight: 50.0,
-        // maxWidth: 50.0,
-      )) ;
-      setState(() {});
-    }
-  
+  XFile? id;
+  XFile? dl;
+  XFile? logbook;
+  XFile? vehicle;
+
+  selectFromCamera() async {
+    cameraFile = (await ImagePicker().pickImage(
+      source: ImageSource.camera,
+      // maxHeight: 50.0,
+      // maxWidth: 50.0,
+    ));
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -69,33 +73,95 @@ class _DriverRegState extends State<DriverReg> {
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
+              child: TextField(
+                  decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                hintText: 'Charges per KM ',
+              )),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
               child: Text(
                 'UPLOAD THE REQUIRED DOCUMENTS',
                 style: TextStyle(color: Colors.blue),
               ),
             ),
             ListTile(
-              onTap: () {
-                selectFromCamera();
-              },
-                leading: Icon(Icons.perm_identity), title: Text('Upload ID')),
-                 ListTile(
-                   onTap: () {
-                selectFromCamera();
-              },
-                  leading: Icon(Icons.picture_in_picture_sharp),
-                  title: Text('Upload  Vehicle Logbook')),
-                   ListTile(
-                     onTap: () {
-                selectFromCamera();
-              },
-                leading: Icon(Icons.car_rental), title: Text('Upload vehicle Image')),
-                 ListTile(
-                   onTap: () {
-                selectFromCamera();
-              },
-                  leading: Icon(Icons.picture_in_picture_alt_sharp),
-                  title: Text('Upload  Driving License')),
+                onTap: () async {
+                  id = (await ImagePicker().pickImage(
+                    source: ImageSource.camera,
+                    // maxHeight: 50.0,
+                    // maxWidth: 50.0,
+                  ));
+                  setState(() {});
+                },
+                leading: Icon(Icons.perm_identity),
+                title: Text('Upload ID')),
+            id == null
+                ? SizedBox()
+                : Image.file(
+                    File(id!.path),
+                    height: 120,
+                    width: 120,
+                  ),
+            ListTile(
+                onTap: () async {
+                  logbook = (await ImagePicker().pickImage(
+                    source: ImageSource.camera,
+                    // maxHeight: 50.0,
+                    // maxWidth: 50.0,
+                  ));
+                  setState(() {});
+                },
+                leading: Icon(Icons.picture_in_picture_sharp),
+                title: Text('Upload  Vehicle Logbook')),
+            logbook == null
+                ? SizedBox()
+                : Image.file(
+                    File(id!.path),
+                    height: 120,
+                    width: 120,
+                  ),
+            ListTile(
+                onTap: () async {
+                  vehicle = (await ImagePicker().pickImage(
+                    source: ImageSource.camera,
+                    // maxHeight: 50.0,
+                    // maxWidth: 50.0,
+                  ));
+                  setState(() {});
+                },
+                leading: Icon(Icons.car_rental),
+                title: Text('Upload vehicle Image')),
+            vehicle == null
+                ? SizedBox()
+                : Image.file(
+                    File(id!.path),
+                    height: 120,
+                    width: 120,
+                  ),
+            ListTile(
+                onTap: () async {
+                  logbook = (await ImagePicker().pickImage(
+                    source: ImageSource.camera,
+                    // maxHeight: 50.0,
+                    // maxWidth: 50.0,
+                  ));
+                  setState(() {});
+                },
+                leading: Icon(Icons.picture_in_picture_alt_sharp),
+                title: Text('Upload  Driving License')),
+            vehicle == null
+                ? SizedBox()
+                : Image.file(
+                    File(id!.path),
+                    height: 120,
+                    width: 120,
+                  ),
+            TextButton(
+              onPressed: () {},
+              child: Text('SUBMIT',style: TextStyle(color: Colors.blue),),
+            )
           ],
         ),
       ),

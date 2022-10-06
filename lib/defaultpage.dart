@@ -19,34 +19,39 @@ class _DefaultPageState extends State<DefaultPage> {
     return Scaffold(
       appBar: AppBar(
           title: Text(
-          'Transportation Jobs Mobile Application',
-           style: TextStyle(color: Colors.greenAccent),
+          'TRANSPORTATION JOBS MOBILE APPLICATION',
+           style: TextStyle(color: Colors.white),
           )
  ),
- body: Center(
-   child: Column(mainAxisAlignment: MainAxisAlignment.center,
-    
-    children: [
-       Text(
-                'FOR YOUR TRANSPORT SOLUTIONS',
-                style: TextStyle(color: Colors.blue),
-              ),
-   TextButton(
-                  onPressed: () => Navigator.of(context).push(
-                      MaterialPageRoute(builder: ((context) => Driver()))),
-                  child: Text(
-                    'See Available drivers',
-                   style: TextStyle(color: Colors.black),
-                  )),
-                   TextButton(
-                  onPressed: () => Navigator.of(context).push(
-                      MaterialPageRoute(builder: ((context) => client()))),
-                  child: Text(
-                    'See Available Jobs',
-                     style: TextStyle(color: Colors.black),
-                    ))
-    ],
-   ),
+ body: Stack(
+   children: [
+     Image.asset('images/bgi.jpg',height: double.infinity,width: double.infinity,fit: BoxFit.cover,),
+     Center(
+       child: Column(mainAxisAlignment: MainAxisAlignment.center,
+        
+        children: [
+           Text(
+                    'FOR YOUR TRANSPORT SOLUTIONS',
+                    style: TextStyle(color: Colors.white),
+                  ),
+       TextButton(
+                      onPressed: () => Navigator.of(context).push(
+                          MaterialPageRoute(builder: ((context) => Driver()))),
+                      child: Text(
+                        'See Available drivers',
+                       style: TextStyle(color: Colors.white),
+                      )),
+                       TextButton(
+                      onPressed: () => Navigator.of(context).push(
+                          MaterialPageRoute(builder: ((context) => client()))),
+                      child: Text(
+                        'See Available Jobs',
+                         style: TextStyle(color: Colors.white),
+                        ))
+        ],
+       ),
+     ),
+   ],
  )
  
       );

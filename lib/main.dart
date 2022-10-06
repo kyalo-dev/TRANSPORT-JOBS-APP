@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'TRANSPORTATION JOBS APP',
       theme: ThemeData(
-        primarySwatch: Colors.blueGrey,
+        primarySwatch: Colors.blue,
       ),
       home: Auth().handleAuth(),
       //home:const MyHomePage(title: 'TRANSPORTATON JOBS MOBILE APP'),
@@ -51,83 +51,92 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
+        appBar: AppBar(backgroundColor: Colors.blueAccent,
           title: Text(widget.title),
+          
         ),
-        body: Center(
-            child: Form(
-          key: _formKey,
-          child: Column(mainAxisAlignment: MainAxisAlignment.center, children: <
-              Widget>[
-            Text(
-              'FOR YOUR TRANSPORT SOLUTIONS',
-              style: TextStyle(color: Colors.blue),
-            ),
-            SizedBox(
-              height: 50,
-              width: 300,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Expanded(child: Text('Email Address')),
-                  SizedBox(
-                    width: 20,
+        body: Stack(
+          children: [
+            Image.asset('images/bgi.jpg',height: double.infinity,width: double.infinity,fit: BoxFit.cover,),
+            Center(
+                child: Form(
+              key: _formKey,
+              child: Column(mainAxisAlignment: MainAxisAlignment.center, children: <
+                  Widget>[
+                Text(
+                  'FOR YOUR TRANSPORT SOLUTIONS',
+                  style: TextStyle(color: Colors.white),
+                ),
+                SizedBox(
+                  height: 50,
+                  width: 300,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(child: Text('Email Address',style: TextStyle(color: Colors.white),)),
+                      SizedBox(
+                        width: 20,
+                      ),
+                      Expanded(
+                          child: TextFormField(
+                            style: TextStyle(color: Colors.white),
+                        controller: emailController,
+                        decoration: InputDecoration(hintText: 'Email',hintStyle: TextStyle(color: Colors.white,)),
+                        validator: (String? value) {
+                          if (value!.isEmpty) {
+                            return 'Email cannot be empty!';
+                          }
+                          return null;
+                        },
+                      )),
+                    ],
                   ),
-                  Expanded(
-                      child: TextFormField(
-                    controller: emailController,
-                    decoration: InputDecoration(hintText: 'Email'),
-                    validator: (String? value) {
-                      if (value!.isEmpty) {
-                        return 'Email cannot be empty!';
-                      }
-                      return null;
-                    },
-                  )),
-                ],
-              ),
-            ),
-            SizedBox(
-              height: 50,
-              width: 300,
-              child: Row(
-                children: [
-                  Expanded(child: Text('Password')),
-                  SizedBox(
-                    width: 20,
+                ),
+                SizedBox(
+                  height: 50,
+                  width: 300,
+                  child: Row(
+                    children: [
+                      Expanded(child: Text('Password',style: TextStyle(color: Colors.white),)),
+                      SizedBox(
+                        width: 20,
+                      ),
+                      Expanded(
+                          child: TextFormField(
+                              style: TextStyle(color: Colors.white),
+                        controller: passwordController,
+                        decoration: InputDecoration(hintText: 'Password',hintStyle: TextStyle(color: Colors.white)),
+                        validator: (String? value) {
+                          if (value!.isEmpty) {
+                            return 'Password cannot be empty!';
+                          }
+                          return null;
+                        },
+                      )),
+                    ],
                   ),
-                  Expanded(
-                      child: TextFormField(
-                    controller: passwordController,
-                    decoration: InputDecoration(hintText: 'Password'),
-                    validator: (String? value) {
-                      if (value!.isEmpty) {
-                        return 'Password cannot be empty!';
-                      }
-                      return null;
+                ),
+                TextButton.icon(
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {
+                        Auth().SignIn(emailController.text.trim(),
+                            passwordController.text.trim());
+                      } else {}
                     },
-                  )),
-                ],
-              ),
-            ),
-            TextButton(
-                onPressed: () {
-                  if (_formKey.currentState!.validate()) {
-                    Auth().SignIn(emailController.text.trim(),
-                        passwordController.text.trim());
-                  } else {}
-                },
-                child: Text('Login')),
-            TextButton(
-                onPressed: () => Navigator.of(context).push(
-                    MaterialPageRoute(builder: ((context) => ResetPassword()))),
-                child: Text('Forgot Password?')),
-            TextButton(
-                onPressed: () => Navigator.of(context).push(
-                    MaterialPageRoute(builder: ((context) => Register()))),
-                child: Text('No Account?Register now'))
-          ]),
-        )));
+                    icon: Icon(Icons.person),
+                    label: Text('Login',style: TextStyle(color: Colors.white),)),
+                TextButton(
+                    onPressed: () => Navigator.of(context).push(
+                        MaterialPageRoute(builder: ((context) => ResetPassword()))),
+                    child: Text('Forgot Password?',style: TextStyle(color: Colors.white),)),
+                TextButton(
+                    onPressed: () => Navigator.of(context).push(
+                        MaterialPageRoute(builder: ((context) => Register()))),
+                    child: Text('No Account?Register now',style: TextStyle(color: Colors.white),))
+              ]),
+            )),
+          ],
+        ));
   }
 }
 

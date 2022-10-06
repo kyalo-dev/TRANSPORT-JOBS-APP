@@ -13,18 +13,12 @@ class Driver extends StatefulWidget {
 
 class _DriverState extends State<Driver> {
    List<String>images=[
-    'truck1.png',
-    'kcb.jpg',
-    'kcv.jpg',
-    'kbk.jpg',
-    'kdb.jpg',
+  'kcv.jpg',
+  'kdb.jpg',
     
   ];
    List<String>title=[
-   ' SMB,Mercedes Flatbed,28Tonne',
-    'KCB.jpg,Isuzu FVZ,Open Dropside 18Tonne ',
     'KCV.jpg,Mercedes Box Body ,30Tonne',
-    'KBK,Mercedes Tipper Body 28Tonne',
     'KDB,Faw Tipper Body, 28Tonne',
     
   ];
