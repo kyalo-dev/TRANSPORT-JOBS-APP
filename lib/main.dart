@@ -51,90 +51,137 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(backgroundColor: Colors.blueAccent,
+        appBar: AppBar(
+          backgroundColor: Colors.blueAccent,
           title: Text(widget.title),
-          
         ),
         body: Stack(
+
           children: [
-            Image.asset('images/bgi.jpg',height: double.infinity,width: double.infinity,fit: BoxFit.cover,),
-            Center(
-                child: Form(
-              key: _formKey,
-              child: Column(mainAxisAlignment: MainAxisAlignment.center, children: <
-                  Widget>[
-                Text(
-                  'FOR YOUR TRANSPORT SOLUTIONS',
-                  style: TextStyle(color: Colors.white),
-                ),
-                SizedBox(
-                  height: 50,
-                  width: 300,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Expanded(child: Text('Email Address',style: TextStyle(color: Colors.white),)),
-                      SizedBox(
-                        width: 20,
-                      ),
-                      Expanded(
-                          child: TextFormField(
+            Image.asset(
+              'images/bgi.jpg',
+              height: double.infinity,
+              width: double.infinity,
+              fit: BoxFit.cover,
+            ),
+            Align(alignment: Alignment.topCenter,child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Image.asset('images/bg1.png',height: 300, width: 600,),
+            ),),
+            
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Form(
+                  key: _formKey,
+                  child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text(
+                      'FOR YOUR TRANSPORT SOLUTIONS',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    SizedBox(
+                      height: 50,
+                      width: 300,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Expanded(
+                              child: Text(
+                            'Email Address',
                             style: TextStyle(color: Colors.white),
-                        controller: emailController,
-                        decoration: InputDecoration(hintText: 'Email',hintStyle: TextStyle(color: Colors.white,)),
-                        validator: (String? value) {
-                          if (value!.isEmpty) {
-                            return 'Email cannot be empty!';
-                          }
-                          return null;
-                        },
-                      )),
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  height: 50,
-                  width: 300,
-                  child: Row(
-                    children: [
-                      Expanded(child: Text('Password',style: TextStyle(color: Colors.white),)),
-                      SizedBox(
-                        width: 20,
+                          )),
+                          SizedBox(
+                            width: 20,
+                          ),
+                          Expanded(
+                              child: TextFormField(
+                            style: TextStyle(color: Colors.white),
+                            controller: emailController,
+                            decoration: InputDecoration(
+                                hintText: 'Email',
+                                hintStyle: TextStyle(
+                                  color: Colors.white,
+                                ),
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(12),
+                                    borderSide:
+                                        BorderSide(color: Colors.white))),
+                            validator: (String? value) {
+                              if (value!.isEmpty) {
+                                return 'Email cannot be empty!';
+                              }
+                              return null;
+                            },
+                          )),
+                        ],
                       ),
-                      Expanded(
-                          child: TextFormField(
-                              style: TextStyle(color: Colors.white),
-                        controller: passwordController,
-                        decoration: InputDecoration(hintText: 'Password',hintStyle: TextStyle(color: Colors.white)),
-                        validator: (String? value) {
-                          if (value!.isEmpty) {
-                            return 'Password cannot be empty!';
-                          }
-                          return null;
+                    ),
+                    SizedBox(
+                      height: 50,
+                      width: 300,
+                      child: Row(
+                        children: [
+                          Expanded(
+                              child: Text(
+                            'Password',
+                            style: TextStyle(color: Colors.white),
+                          )),
+                          SizedBox(
+                            width: 20,
+                          ),
+                          Expanded(
+                              child: TextFormField(
+                            style: TextStyle(color: Colors.white),
+                            controller: passwordController,
+                            decoration: InputDecoration(
+                                hintText: 'Password',
+                                hintStyle: TextStyle(color: Colors.white),
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(12),
+                                    borderSide:
+                                        BorderSide(color: Colors.white))),
+                            validator: (String? value) {
+                              if (value!.isEmpty) {
+                                return 'Password cannot be empty!';
+                              }
+                              return null;
+                            },
+                          )),
+                        ],
+                      ),
+                    ),
+                    TextButton.icon(
+                        onPressed: () {
+                          if (_formKey.currentState!.validate()) {
+                            Auth().SignIn(emailController.text.trim(),
+                                passwordController.text.trim());
+                          } else {}
                         },
-                      )),
-                    ],
-                  ),
+                        icon: Icon(Icons.person),
+                        label: Text(
+                          'Login',
+                          style: TextStyle(color: Colors.white),
+                        )),
+                    TextButton(
+                        onPressed: () => Navigator.of(context).push(
+                            MaterialPageRoute(
+                                builder: ((context) => ResetPassword()))),
+                        child: Text(
+                          'Forgot Password?',
+                          style: TextStyle(color: Colors.white),
+                        )),
+                    TextButton(
+                        onPressed: () => Navigator.of(context).push(
+                            MaterialPageRoute(
+                                builder: ((context) => Register()))),
+                        child: Text(
+                          'No Account?Register now',
+                          style: TextStyle(color: Colors.white),
+                        ))
+                  ]),
                 ),
-                TextButton.icon(
-                    onPressed: () {
-                      if (_formKey.currentState!.validate()) {
-                        Auth().SignIn(emailController.text.trim(),
-                            passwordController.text.trim());
-                      } else {}
-                    },
-                    icon: Icon(Icons.person),
-                    label: Text('Login',style: TextStyle(color: Colors.white),)),
-                TextButton(
-                    onPressed: () => Navigator.of(context).push(
-                        MaterialPageRoute(builder: ((context) => ResetPassword()))),
-                    child: Text('Forgot Password?',style: TextStyle(color: Colors.white),)),
-                TextButton(
-                    onPressed: () => Navigator.of(context).push(
-                        MaterialPageRoute(builder: ((context) => Register()))),
-                    child: Text('No Account?Register now',style: TextStyle(color: Colors.white),))
-              ]),
-            )),
+            ),
           ],
         ));
   }
@@ -144,7 +191,6 @@ class Auth {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
   handleAuth() {
-   
     return StreamBuilder(
         stream: _auth.authStateChanges(),
         builder: ((context, snapshot) {
@@ -157,12 +203,13 @@ class Auth {
   }
 
   Future SignIn(String email, String password) async {
-
-    await _auth.signInWithEmailAndPassword(email: email, password: password).then((creds) => //debugPrint(user.toString())
-     Fluttertoast.showToast(msg: 'logged in as ${creds.user!.email}')
-     );
+    await _auth
+        .signInWithEmailAndPassword(email: email, password: password)
+        .then((creds) => //debugPrint(user.toString())
+            Fluttertoast.showToast(msg: 'logged in as ${creds.user!.email}'));
   }
-  Future SignOut()async{
+
+  Future SignOut() async {
     await _auth.signOut();
   }
 }

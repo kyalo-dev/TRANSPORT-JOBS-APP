@@ -18,21 +18,25 @@ class _ResetPasswordState extends State<ResetPassword> {
       appBar: AppBar(
         title: Text('Reset Password'),
       ),
-      body: Center(
-          child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TextField(
-              decoration: InputDecoration(hintText: 'Enter your Email Address',border: OutlineInputBorder(),),
-             
-            ),
-          ),
-           TextButton(onPressed:(){} ,child: Text('Reset Password')),
-              
+      body: Stack(
+        children: [Image.asset('images/bgi.jpg',height: double.infinity,width: double.infinity,fit: BoxFit.cover,),
+          Center(
+              child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TextField(style: TextStyle(color: Colors.white),
+                  decoration: InputDecoration(hintText: 'Enter your Email Address',hintStyle: TextStyle(color: Colors.white),border: OutlineInputBorder(),),
+                 
+                ),
+              ),
+               TextButton(onPressed:(){} ,child: Text('Reset Password',style: TextStyle(color: Colors.white),)),
+                  
+            ],
+          )),
         ],
-      )),
+      ),
     );
   }
 }

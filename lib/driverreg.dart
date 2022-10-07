@@ -6,10 +6,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:index2/upload.dart';
 
 class DriverReg extends StatefulWidget {
-  const DriverReg({super.key});
-
+  const DriverReg({super.key, required this.email, required this.password});
+  final String email;
+  final String password;
   @override
   State<DriverReg> createState() => _DriverRegState();
 }
@@ -20,6 +22,37 @@ class _DriverRegState extends State<DriverReg> {
   XFile? dl;
   XFile? logbook;
   XFile? vehicle;
+  Map<String, dynamic> images = {
+    'id': '',
+    'dl': '',
+    'logbook': '',
+    'vehicle': '',
+  };
+  Future<Map<String, dynamic>> uploadImages() async {
+    Map<String, dynamic> temp = {};
+    images.forEach((key, value) async {
+      switch (key) {
+        case 'id':
+          temp.putIfAbsent(
+              'id', () async => await UploadImage().uploadFile(File(id!.path)));
+          break;
+        case 'dl':
+          temp.putIfAbsent(
+              'dl', () async => await UploadImage().uploadFile(File(dl!.path)));
+          break;
+        case 'logbook':
+          temp.putIfAbsent(
+              'logbook', () async => await UploadImage().uploadFile(File(logbook!.path)));
+          break;
+        case 'vehicle':
+          temp.putIfAbsent(
+              'vehicle', () async => await UploadImage().uploadFile(File(vehicle!.path)));
+          break;
+        default:
+      }
+    });
+    return temp;
+  }
 
   selectFromCamera() async {
     cameraFile = (await ImagePicker().pickImage(
@@ -30,6 +63,14 @@ class _DriverRegState extends State<DriverReg> {
     setState(() {});
   }
 
+  TextEditingController idNumberController = TextEditingController();
+  TextEditingController vehicleRegistrationNumberController =
+      TextEditingController();
+  TextEditingController vehicleTonnageController = TextEditingController();
+  TextEditingController vehicleBodyTypeController = TextEditingController();
+  TextEditingController chargesPerKmController = TextEditingController();
+  @override
+  @override
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,6 +81,7 @@ class _DriverRegState extends State<DriverReg> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: TextField(
+                controller: idNumberController,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
                   hintText: 'ID NUMBER',
@@ -49,6 +91,7 @@ class _DriverRegState extends State<DriverReg> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: TextField(
+                controller: vehicleRegistrationNumberController,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
                   hintText: 'Vehicle Registration number ',
@@ -58,26 +101,29 @@ class _DriverRegState extends State<DriverReg> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: TextField(
+                  controller: vehicleTonnageController,
                   decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                hintText: 'Vehicle Tonnage ',
-              )),
+                    border: OutlineInputBorder(),
+                    hintText: 'Vehicle Tonnage ',
+                  )),
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: TextField(
+                  controller: vehicleBodyTypeController,
                   decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                hintText: 'Vehicle Body type ',
-              )),
+                    border: OutlineInputBorder(),
+                    hintText: 'Vehicle Body type ',
+                  )),
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: TextField(
+                  controller: chargesPerKmController,
                   decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                hintText: 'Charges per KM ',
-              )),
+                    border: OutlineInputBorder(),
+                    hintText: 'Charges per KM ',
+                  )),
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
@@ -118,7 +164,7 @@ class _DriverRegState extends State<DriverReg> {
             logbook == null
                 ? SizedBox()
                 : Image.file(
-                    File(id!.path),
+                    File(logbook!.path),
                     height: 120,
                     width: 120,
                   ),
@@ -136,13 +182,13 @@ class _DriverRegState extends State<DriverReg> {
             vehicle == null
                 ? SizedBox()
                 : Image.file(
-                    File(id!.path),
+                    File(vehicle!.path),
                     height: 120,
                     width: 120,
                   ),
             ListTile(
                 onTap: () async {
-                  logbook = (await ImagePicker().pickImage(
+                  dl = (await ImagePicker().pickImage(
                     source: ImageSource.camera,
                     // maxHeight: 50.0,
                     // maxWidth: 50.0,
@@ -151,16 +197,21 @@ class _DriverRegState extends State<DriverReg> {
                 },
                 leading: Icon(Icons.picture_in_picture_alt_sharp),
                 title: Text('Upload  Driving License')),
-            vehicle == null
+            dl == null
                 ? SizedBox()
                 : Image.file(
-                    File(id!.path),
+                    File(dl!.path),
                     height: 120,
                     width: 120,
                   ),
             TextButton(
-              onPressed: () {},
-              child: Text('SUBMIT',style: TextStyle(color: Colors.blue),),
+              onPressed: () {
+                uploadImages().then((value) => debugPrint(value.toString()));
+              },
+              child: Text(
+                'SUBMIT',
+                style: TextStyle(color: Colors.blue),
+              ),
             )
           ],
         ),
