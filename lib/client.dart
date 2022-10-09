@@ -57,12 +57,13 @@ class _clientState extends State<client> {
             })),
             
           ),
-          TextButton(
-                   onPressed: () => Navigator.of(context).push(
-                        MaterialPageRoute(builder: ((context) => clientAdd()))),
-                         child: Text('Add a new Job',style: TextStyle(color: Colors.blue),))
+        
         ],
       ),
+      floatingActionButton: FloatingActionButton.extended(onPressed: () => Navigator.of(context).push(
+                        MaterialPageRoute(builder: ((context) => clientAdd()))),
+                         icon: Icon(Icons.add),
+                         label: Text('Add a new Job',style: TextStyle(color: Colors.black),)),
     );
   }
 }

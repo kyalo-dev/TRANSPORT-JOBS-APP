@@ -202,13 +202,33 @@ class Auth {
         }));
   }
 
-  Future SignIn(String email, String password) async {
-    await _auth
-        .signInWithEmailAndPassword(email: email, password: password)
-        .then((creds) => //debugPrint(user.toString())
-            Fluttertoast.showToast(msg: 'logged in as ${creds.user!.email}'));
+  Future<UserCredential?> SignIn(String email, String password) async {
+   UserCredential ?userCredential;
+   try {
+     userCredential= await _auth
+        .signInWithEmailAndPassword(email: email, password: password);
+       
+   }on FirebaseAuthException catch (e) {
+     Fluttertoast.showToast(msg: e.code);
+   } catch(e){
+     Fluttertoast.showToast(msg: e.toString());
+   }
+   return userCredential;
   }
 
+  Future<UserCredential?> userRegistration(String email, String password) async {
+   UserCredential ?userCredential;
+   try {
+     userCredential= await _auth
+        .createUserWithEmailAndPassword(email: email, password: password);
+       
+   }on FirebaseAuthException catch (e) {
+     Fluttertoast.showToast(msg: e.code);
+   } catch(e){
+     Fluttertoast.showToast(msg: e.toString());
+   }
+   return userCredential;
+  }
   Future SignOut() async {
     await _auth.signOut();
   }
