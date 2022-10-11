@@ -290,10 +290,16 @@ bool isuploading=false;
                     //   Fluttertoast.showToast(msg: 'upload required images');
                       
                     // }else {
-                  
-                      upload().then((images) {
-                    Auth().userRegistration(emailController.text.trim(), passwordController.text.trim()).then((creds) {
-                      firestore.collection('users').doc(creds?.user?.uid).set({
+                  Auth()
+                                    .userRegistration(
+                                        emailController.text.trim(),
+                                        passwordController.text.trim())
+                                    .then((creds) {
+                                  upload().then((images) {
+                                    firestore
+                                        .collection('users')
+                                        .doc(creds?.user?.uid)
+                                        .set({
                         'email':creds?.user?.email,
                         'idnumber':idNumberController.text.trim(),
                         'vehiclereg':vehicleRegistrationNumberController.text.trim(),
@@ -301,21 +307,22 @@ bool isuploading=false;
                         'vehicletonnage':vehicleTonnageController.text.trim(),
                         'chargesperkm':chargesPerKmController.text.trim(),
                         'images':images,
+ });
+                                  }).then((value) {
+                                    Fluttertoast.showToast(
+                                        msg: "Registered Successfully");
+                                    setState(() {
+                                      isuploading = false;
+                                    });
+                                  });
+                                });
 
-                      }).then((value) {
-                        setState(() {
-                          isuploading=false;
-                          Fluttertoast.showToast(msg: "Successfully uploaded");
-                        });
-                      });
-                    });
-                  });
-                   // }
-                  }else{
-                    Fluttertoast.showToast(msg: 'Please fill in all details');
-                  }
-                  
-                },
+                                // }
+                              } else {
+                                Fluttertoast.showToast(
+                                    msg: 'Please fill in all details');
+                              }
+                            },
                 child: Text(
                   'SUBMIT',
                   style: TextStyle(color: Colors.blue),

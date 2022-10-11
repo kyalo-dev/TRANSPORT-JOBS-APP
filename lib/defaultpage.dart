@@ -17,60 +17,86 @@ class _DefaultPageState extends State<DefaultPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-          title: Text(
+        appBar: AppBar(
+            title: Text(
           'TRANSPORTATION JOBS MOBILE APPLICATION',
-           style: TextStyle(color: Colors.white),
-          )
- ),
- body: Stack(
-   children: [
-     Image.asset('images/bgi.jpg',height: double.infinity,width: double.infinity,fit: BoxFit.cover,),
-      Align(alignment: Alignment.topCenter,child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Image.asset('images/bg3.png',height: 300, width: 600,),
-            ),),
-            
-     Center(
-       child: Column(mainAxisAlignment: MainAxisAlignment.center,
-        
-        children: [
-           Text(
+          style: TextStyle(color: Colors.white),
+        )),
+        body: Stack(
+          children: [
+            Image.asset(
+              'images/bgi.jpg',
+              height: double.infinity,
+              width: double.infinity,
+              fit: BoxFit.cover,
+            ),
+            Align(
+              alignment: Alignment.topCenter,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Image.asset(
+                  'images/bg3.png',
+                  height: 300,
+                  width: 600,
+                ),
+              ),
+            ),
+            Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
                     'FOR YOUR TRANSPORT SOLUTIONS',
                     style: TextStyle(color: Colors.white),
                   ),
-       TextButton(
+                  TextButton(
                       onPressed: () => Navigator.of(context).push(
                           MaterialPageRoute(builder: ((context) => Driver()))),
-                      child: Row(mainAxisAlignment: MainAxisAlignment.center,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                         Icon(Icons.directions_car),
+                          Icon(Icons.directions_car),
                           Text(
                             'See Available drivers',
-                           style: TextStyle(color: Colors.white),
+                            style: TextStyle(color: Colors.white),
                           ),
                         ],
                       )),
-                       TextButton(
+                  TextButton(
                       onPressed: () => Navigator.of(context).push(
                           MaterialPageRoute(builder: ((context) => client()))),
-                      child: Row(mainAxisAlignment: MainAxisAlignment.center,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                         Icon(Icons.work),
+                          Icon(Icons.work),
                           Text(
                             'See Available Jobs',
-                             style: TextStyle(color: Colors.white),
-                            ),
+                            style: TextStyle(color: Colors.white),
+                          ),
                         ],
                       ))
-        ],
-       ),
-     ),
-   ],
- )
- 
-      );
-
-    
+                ],
+              ),
+            ),
+          ],
+        ),
+        bottomNavigationBar: BottomNavigationBar(
+          backgroundColor: Colors.white,
+          items: const <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: Icon(
+                Icons.home,
+              ),
+              label: 'Home',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(
+              
+                Icons.perm_identity_outlined
+                ),
+              label: 'Profile',
+            ),
+          ],
+        ));
   }
 }

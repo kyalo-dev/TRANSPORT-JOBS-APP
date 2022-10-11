@@ -87,6 +87,7 @@ class _clientState extends State<client> {
                         child: Column(
                           children: [
                             Text(jobs['description']),
+                             Text(jobs['tonnage'] + " tonnes"),
                             Image.network(
                               jobs['images'][0]['path'],
                               height: 150,
@@ -94,7 +95,7 @@ class _clientState extends State<client> {
                               fit: BoxFit.cover,
                             ),
                             Text(
-                                'from ${jobs['location']} to ${jobs['destination']}')
+                                'FROM  ${jobs['location']} TO ${jobs['destination']}')
                           ],
                         ),
                       ),
