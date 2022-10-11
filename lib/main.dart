@@ -48,14 +48,17 @@ class _MyHomePageState extends State<MyHomePage> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  
+  bool loading=false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
         appBar: AppBar(
           backgroundColor: Colors.blueAccent,
           title: Text(widget.title),
         ),
-        body: Stack(
+        body:loading?Center(child: CircularProgressIndicator(),) :Stack(
 
           children: [
             Image.asset(
@@ -80,82 +83,90 @@ class _MyHomePageState extends State<MyHomePage> {
                       'FOR YOUR TRANSPORT SOLUTIONS',
                       style: TextStyle(color: Colors.white),
                     ),
-                    SizedBox(
-                      height: 50,
-                      width: 300,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Expanded(
-                              child: Text(
-                            'Email Address',
-                            style: TextStyle(color: Colors.white),
-                          )),
-                          SizedBox(
-                            width: 20,
-                          ),
-                          Expanded(
-                              child: TextFormField(
-                            style: TextStyle(color: Colors.white),
-                            controller: emailController,
-                            decoration: InputDecoration(
-                                hintText: 'Email',
-                                hintStyle: TextStyle(
-                                  color: Colors.white,
-                                ),
-                                border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(12),
-                                    borderSide:
-                                        BorderSide(color: Colors.white))),
-                            validator: (String? value) {
-                              if (value!.isEmpty) {
-                                return 'Email cannot be empty!';
-                              }
-                              return null;
-                            },
-                          )),
-                        ],
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: SizedBox(
+                        height: 70,
+                        width: MediaQuery.of(context).size.width,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Expanded(flex: 1,
+                                child: Text(
+                              'Email Address',
+                              style: TextStyle(color: Colors.white),
+                            )),
+                           
+                            Expanded(flex: 3,
+                                child: TextFormField(
+                              style: TextStyle(color: Colors.white),
+                              controller: emailController,
+                              decoration: InputDecoration(
+                                  hintText: 'Email',
+                                  hintStyle: TextStyle(
+                                    color: Colors.white,
+                                  ),
+                                  border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(12),
+                                      borderSide:
+                                          BorderSide(color: Colors.white))),
+                              validator: (String? value) {
+                                if (value!.isEmpty) {
+                                  return 'Email cannot be empty!';
+                                }
+                                return null;
+                              },
+                            )),
+                          ],
+                        ),
                       ),
                     ),
-                    SizedBox(
-                      height: 50,
-                      width: 300,
-                      child: Row(
-                        children: [
-                          Expanded(
-                              child: Text(
-                            'Password',
-                            style: TextStyle(color: Colors.white),
-                          )),
-                          SizedBox(
-                            width: 20,
-                          ),
-                          Expanded(
-                              child: TextFormField(
-                            style: TextStyle(color: Colors.white),
-                            controller: passwordController,
-                            decoration: InputDecoration(
-                                hintText: 'Password',
-                                hintStyle: TextStyle(color: Colors.white),
-                                border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(12),
-                                    borderSide:
-                                        BorderSide(color: Colors.white))),
-                            validator: (String? value) {
-                              if (value!.isEmpty) {
-                                return 'Password cannot be empty!';
-                              }
-                              return null;
-                            },
-                          )),
-                        ],
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: SizedBox(
+                        height: 50,
+                        width: MediaQuery.of(context).size.width,
+                        child: Row(
+                          children: [
+                            Expanded(flex: 1,
+                                child: Text(
+                              'Password',
+                              style: TextStyle(color: Colors.white),
+                            )),
+                           
+                            Expanded(flex: 3,
+                                child: TextFormField(
+                              style: TextStyle(color: Colors.white),
+                              controller: passwordController,
+                              decoration: InputDecoration(
+                                  hintText: 'Password',
+                                  hintStyle: TextStyle(color: Colors.white),
+                                  border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(12),
+                                      borderSide:
+                                          BorderSide(color: Colors.white))),
+                              validator: (String? value) {
+                                if (value!.isEmpty) {
+                                  return 'Password cannot be empty!';
+                                }
+                                return null;
+                              },
+                            )),
+                          ],
+                        ),
                       ),
                     ),
                     TextButton.icon(
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
+                            setState(() {
+                              loading=true;
+                            });
                             Auth().SignIn(emailController.text.trim(),
-                                passwordController.text.trim());
+                                passwordController.text.trim()).then((creds) =>setState((){
+                                   loading=false;
+                                   
+                                }));
                           } else {}
                         },
                         icon: Icon(Icons.person),

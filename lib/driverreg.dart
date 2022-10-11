@@ -21,7 +21,7 @@ class DriverReg extends StatefulWidget {
 }
 
 class _DriverRegState extends State<DriverReg> {
-  XFile? cameraFile;
+
   XFile? id;
   XFile? dl;
   XFile? logbook;
